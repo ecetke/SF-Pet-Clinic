@@ -4,8 +4,6 @@ import com.springframework.sfpetclinic.model.Owner;
 import com.springframework.sfpetclinic.model.Vet;
 import com.springframework.sfpetclinic.services.OwnerService;
 import com.springframework.sfpetclinic.services.VetService;
-import com.springframework.sfpetclinic.services.map.OwnerServiceMap;
-import com.springframework.sfpetclinic.services.map.VetServiceMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +13,9 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataLoader() {
-        this.ownerService = new OwnerServiceMap();
-        this.vetService = new VetServiceMap();
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
@@ -46,7 +44,14 @@ public class DataLoader implements CommandLineRunner {
 
         vetService.save(vet1);
 
-        System.out.println("Loaded just only one vet!");
+        Vet vet2 = new Vet();
+        vet2.setId(2L);
+        vet2.setFirstName("Johnas");
+        vet2.setLastName("Fisher");
+
+        vetService.save(vet2);
+
+        System.out.println("Loaded vets!");
 
 
     }
