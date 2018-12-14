@@ -41,15 +41,16 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> 
 
     private Long genNextID() {
 
-        Long nextGenID = null;
+        Long nextGeneratedID = null;
 
         try {
-            nextGenID = Collections.max(map.keySet()) + 1;
+            nextGeneratedID = Collections.max(map.keySet()) + 1;
         } catch (NoSuchElementException ex) {
-            nextGenID = 1L;
+            nextGeneratedID = 1L;
         }
 
-        return nextGenID;
+        return nextGeneratedID;
+
     }
 }
 
